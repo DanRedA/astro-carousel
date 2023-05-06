@@ -1,0 +1,74 @@
+.container {
+  width:97%;
+  margin: 10px auto;
+  /* border: 1px solid #eee; */
+}
+.carousel {
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #888;
+}
+.slider {
+  height: 100%;
+  width: 500%;
+  display: flex;
+  transition: all 0.3s;
+  /* transform: translate(-25%); */
+}
+.slider section {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.controls {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
+  
+  pointer-events: none;
+  /* border: 1px solid red; */
+}
+.controls .arrow {
+  cursor: pointer;
+  pointer-events: auto;
+}
+.control-dots ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  margin: .5rem auto;
+}
+.control-dots ul li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #888;
+  cursor: pointer;
+  background: transparent;
+}
+.control-dots ul li.selected {
+  background-color: #888;
+}
+
+
+@media screen and (min-width: 636px) {
+  .container {
+    width: 99%;
+  }
+  .carousel {
+    aspect-ratio: 16 / 6;
+  }
+  .controls {
+    padding: 1%;
+  }
+}

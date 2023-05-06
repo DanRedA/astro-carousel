@@ -1,0 +1,75 @@
+---
+import '../styles/slider.css';
+import ArrowLeft from './icons/ArrowLeft.astro';
+import ArrowRight from './icons/ArrowRight.astro';
+---
+<div class="container">
+  <div class="carousel">
+    <div class="slider">
+      <section style="background: #0081a7 center / cover no-repeat url('https://cdn.pixabay.com/photo/2017/04/16/18/01/coffee-2235370_960_720.jpg');">
+        <a href="#">Content for section 1</a>
+      </section>
+      <section style="background: #00afb9 center / cover no-repeat url('https://cdn.pixabay.com/photo/2019/06/02/17/33/woman-4246954_960_720.jpg');">
+        Content for section 2
+      </section>
+      <section style="background: #fdfcdc center / cover no-repeat url('https://cdn.pixabay.com/photo/2017/03/27/14/14/coffee-2179009_960_720.jpg');">
+        Content for section 3
+      </section>
+      <section style="background: #fed9b7 center / cover no-repeat url('https://cdn.pixabay.com/photo/2020/04/17/12/49/barista-5055060_960_720.jpg');">
+        Content for section 4
+      </section>
+      <section style="background: #f07167 center / cover no-repeat url('https://cdn.pixabay.com/photo/2017/07/31/19/27/coffee-2560260_960_720.jpg');">
+        Content for section 5
+      </section>
+    </div>
+    <div class="controls">
+      <span class="arrow left">
+        <ArrowLeft />
+      </span>
+      <span class="arrow right">
+        <ArrowRight />
+      </span>
+    </div>
+  </div>
+  <div class="control-dots">
+    <ul>
+      <li class="selected"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const slider = document.querySelector('.slider');
+  const leftArrow = document.querySelector('.left');
+  const rightArrow = document.querySelector('.right');
+  const indicatorParents = document.querySelector('.control-dots ul');
+
+  let sectionIndex = 0;
+
+  document.querySelectorAll('.container .control-dots li').forEach(function(indicator, ind) {
+    indicator.addEventListener('click', function() {
+      sectionIndex = ind;
+      document.querySelector('.container .selected').classList.remove('selected');
+      indicator.classList.add('selected');
+      slider.style.transform = 'translate(' + (sectionIndex) * -20 + '%)'; 
+    });
+  });
+
+  leftArrow.addEventListener('click', () => {
+    sectionIndex = (sectionIndex > 0) ? sectionIndex - 1 : 0;
+    document.querySelector('.container .selected').classList.remove('selected');
+    indicatorParents.children[sectionIndex].classList.add('selected');
+    slider.style.transform = 'translate(' + (sectionIndex) * -20 + '%)'; 
+  });
+
+  rightArrow.addEventListener('click', () => {
+    sectionIndex = (sectionIndex < 4) ? sectionIndex + 1 : 4;
+    document.querySelector('.container .selected').classList.remove('selected');
+    indicatorParents.children[sectionIndex].classList.add('selected');
+    slider.style.transform = 'translate(' + (sectionIndex) * -20 + '%)'; 
+  });
+</script>
