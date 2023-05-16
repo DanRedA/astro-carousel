@@ -1,0 +1,83 @@
+---
+import '../styles/infinite-slider.css';
+import ArrowLeft from './icons/ArrowLeft.astro';
+import ArrowRight from './icons/ArrowRight.astro';
+---
+<div class="inf-container">
+  <div class="inf-carousel">
+    <div class="inf-slider">
+      <section>
+        <a href="#">Content for section 1</a>
+      </section>
+      <section>
+        Content for section 2
+      </section>
+      <section>
+        Content for section 3
+      </section>
+      <section>
+        Content for section 4
+      </section>
+      <section>
+        Content for section 5
+      </section>
+    </div>
+    <div class="inf-controls">
+      <span class="inf-arrow inf-prev">
+        <ArrowLeft />
+      </span>
+      <span class="inf-arrow inf-next">
+        <ArrowRight />
+      </span>
+    </div>
+  </div>
+  <!-- <div class="control-dots">
+    <ul>
+      <li class="selected"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div> -->
+</div>
+
+<script>
+  const slider = document.querySelector('.inf-slider');
+  const prev = document.querySelector('.inf-prev');
+  const next = document.querySelector('.inf-next');
+  const carousel = document.querySelector('.inf-carousel');
+  let direction;
+
+  prev.addEventListener('click', function() {
+    if (direction === -1) {
+      slider.appendChild(slider.firstElementChild);
+      direction = 1;
+    };
+    carousel.style.justifyContent = 'flex-end';
+    slider.style.transform = 'translate(20%)';
+  });
+  next.addEventListener('click', function() {
+    if (direction === 1) {
+      slider.prepend(slider.lastElementChild);
+      // direction = -1;
+    }
+    direction = -1;
+    carousel.style.justifyContent = 'flex-start';
+    slider.style.transform = 'translate(-20%)';
+  });
+
+  slider.addEventListener('transitionend', function() {
+    if (direction === -1) {
+      slider.appendChild(slider.firstElementChild);
+    } else if (direction === 1) {
+      slider.prepend(slider.lastElementChild);
+    };
+
+    slider.style.transition = 'none';
+    slider.style.transform = 'translate(0)';
+    setInterval(function() {
+      slider.style.transition = 'all 0.3s';
+    })
+  });
+</script>
